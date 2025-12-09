@@ -1,5 +1,11 @@
-#! /usr/bin/env python3
+#!/usr/bin/env -S uv run --script
+#
+# /// script
+# requires-python = ">=3.14"
+# dependencies = []
+# ///
 
+from pathlib import Path
 import math
 
 def part_one(lines: list[str]) -> int:
@@ -31,7 +37,6 @@ def part_two(lines: list[str]) -> int:
             # We hit the end of this problem
             if operands:
                 # This should always be the case, except for the first column
-                print(f'operands is {operands}')
                 op = sum if operations[problem_num] == '+' else math.prod
                 result = op(operands)
                 total += result
@@ -46,7 +51,7 @@ def part_two(lines: list[str]) -> int:
 
 if __name__ == '__main__':      
     for input_file in ('test.txt', 'input.txt'):
-        with open(input_file, 'r') as file:
+        with open(Path(__file__).resolve().parent / input_file, 'r') as file:
             lines = file.readlines()
         part_one_result = part_one(lines)
         print(f'  Part one: {part_one_result}')

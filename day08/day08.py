@@ -1,6 +1,13 @@
-#! /usr/bin/env python3
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.14"
+# dependencies = [
+#     "networkx",
+# ]
+# ///
 
 import math
+from pathlib import Path
 import networkx as nx
 
 def part_one_and_two(lines: list[str], num_to_connect: int) -> tuple[int, int]:
@@ -28,10 +35,11 @@ def part_one_and_two(lines: list[str], num_to_connect: int) -> tuple[int, int]:
             break
     return (result_part_one, result_part_two)
 
-if __name__ == '__main__':      
+if __name__ == '__main__':   
     for input_file, num_to_connect in (('test.txt', 10 ), ('input.txt', 1000)):
+        input_path = Path(__file__).resolve().parent / input_file
         print(f'{input_file}:')
-        with open(input_file, 'r') as file:
+        with open(input_path, 'r') as file:
             lines = [s for l in file.readlines() if (s := l.strip())]
         part_one_result, part_two_result = part_one_and_two(lines, num_to_connect)
         print(f'  Part one: {part_one_result}')

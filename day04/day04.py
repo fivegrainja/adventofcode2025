@@ -1,4 +1,11 @@
-#! /usr/bin/env python3
+#!/usr/bin/env -S uv run --script
+#
+# /// script
+# requires-python = ">=3.14"
+# dependencies = []
+# ///
+
+from pathlib import Path
 
 def count_movable_rolls(lines: list[str]) -> int:
     num_movable = 0
@@ -77,14 +84,14 @@ def remove_rolls(lines: list[str]) -> int:
 
 print(f'Part One:')
 for input_file in ('test.txt', 'input.txt'):
-    with open(input_file, 'r') as file:
+    with open(Path(__file__).resolve().parent / input_file, 'r') as file:
         lines = [s for l in file.readlines() if (s := l.strip())]
         part_one = count_movable_rolls(lines)
         print(f'  {input_file}: {part_one}')
 
 print(f'Part Two:')
 for input_file in ('test.txt', 'input.txt'):
-    with open(input_file, 'r') as file:
+    with open(Path(__file__).resolve().parent / input_file, 'r') as file:
         lines = [s for l in file.readlines() if (s := l.strip())]
         part_two = remove_rolls(lines)
         print(f'  {input_file}: {part_two}')

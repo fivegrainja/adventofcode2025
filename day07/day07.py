@@ -1,5 +1,11 @@
-#! /usr/bin/env python3
+#!/usr/bin/env -S uv run --script
+#
+# /// script
+# requires-python = ">=3.14"
+# dependencies = []
+# ///
 
+from pathlib import Path
 import functools
 
 def part_one(lines: list[str]) -> int:
@@ -35,7 +41,7 @@ def part_two(lines: tuple[str]) -> int:
 
 if __name__ == '__main__':      
     for input_file in ('test.txt', 'input.txt'):
-        with open(input_file, 'r') as file:
+        with open(Path(__file__).resolve().parent / input_file, 'r') as file:
             # Use a tuple instead of list so that lru_cache can hash it
             lines = tuple([s for l in file.readlines() if (s := l.strip())])
         part_one_result = part_one(lines)

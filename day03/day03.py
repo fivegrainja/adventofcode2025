@@ -1,4 +1,11 @@
-#! /usr/bin/env python3
+#!/usr/bin/env -S uv run --script
+#
+# /// script
+# requires-python = ">=3.14"
+# dependencies = []
+# ///
+
+from pathlib import Path
 
 def get_line_joltage(digits: list[int]) -> int:
     """ Select two digits, A and B, from input list that together as "AB" make
@@ -50,7 +57,7 @@ def add_joltages(lines: list[str], calculator: callable) -> int:
 for calculator in (('Part One', get_line_joltage), ('Part Two', get_fancy_line_joltage)):
     print(calculator[0])
     for input_file in ('test.txt', 'input.txt'):
-        with open(input_file, 'r') as file:
+        with open(Path(__file__).resolve().parent / input_file, 'r') as file:
             lines = [s for l in file.readlines() if (s := l.strip())]
         total = add_joltages(lines, calculator[1])
         print(f'For {input_file}:')

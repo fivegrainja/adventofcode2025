@@ -1,4 +1,11 @@
-#! /usr/bin/env python3
+#!/usr/bin/env -S uv run --script
+#
+# /// script
+# requires-python = ">=3.14"
+# dependencies = []
+# ///
+
+from pathlib import Path
 
 def is_ingredient_fresh(fresh: list[(int, int)], ingredient: int) -> bool:
     for f in fresh:
@@ -48,7 +55,7 @@ for input_file in ('test.txt', 'input.txt'):
 
     # Read fresh range lines into a list of tuples of 2 ints each.
     # Reach ingredient list into list of ints
-    with open(input_file, 'r') as file:
+    with open(Path(__file__).resolve().parent / input_file, 'r') as file:
         lines = file.readlines()
     separator_i = lines.index('\n')
     fresh_tuples = [l.strip().split('-') for l in lines[:separator_i]]

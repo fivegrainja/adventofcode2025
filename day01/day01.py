@@ -1,4 +1,11 @@
-#! /usr/bin/env python3
+#!/usr/bin/env -S uv run --script
+#
+# /// script
+# requires-python = ">=3.14"
+# dependencies = []
+# ///
+
+from pathlib import Path
 
 def unlock_safe(turns: list[str]) -> None:
     dial: int = 50
@@ -32,8 +39,8 @@ def unlock_safe(turns: list[str]) -> None:
     print(f'landed_on_zero: {landed_on_zero}')
     print(f'click_on_zero: {click_on_zero}')
 
-for input_file in ('day01_test.txt', 'day01_input.txt'):
-    with open(input_file, 'r') as file:
+for input_file in ('test.txt', 'input.txt'):
+    with open(Path(__file__).resolve().parent / input_file, 'r') as file:
         turns: list[str] = [l for l in file.readlines() if l.strip()]
         print(f'Results for {input_file}')
         unlock_safe(turns)
