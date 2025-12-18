@@ -7,13 +7,12 @@
 # ///
 
 from pathlib import Path
-# from functools import reduce, lru_cache, cmp_to_key
-# from queue import PriorityQueue
-# from typing import Optional
-from collections import deque #, Counter
-# from itertools import chain
+from collections import deque
 
 def region_fits_shapes(region: tuple[int, int, tuple], shapes: dict[int, list[str]]) -> bool:
+    # This is a naive test, but it seems to work for my input
+    # Assume each shape is a full 3x3 square, multiply by the numeber of shapes
+    # and see if it fits in the region area.
     area = region[0] * region[1]
     num_shapes = sum(region[2])
     if num_shapes * 9 <= area:
@@ -24,9 +23,6 @@ def part_one(lines: list[str]) -> int:
     shapes, regions = parse(lines)
     result = sum([region_fits_shapes(region, shapes) for region in regions])
     return result
-
-def part_two(lines: list[str]) -> int:
-    return None
 
 def parse(lines: list[str]) -> tuple[list[list], list[tuple[int, int, tuple]]]:
     lines = deque(lines)
@@ -57,7 +53,4 @@ if __name__ == '__main__':
             lines = [s for l in file.readlines() if (s := l.strip())]
         result = part_one(lines)
         print(f'  Part one: {result}')
-        # result = part_two(lines)
-        # print(f'  Part two: {result}')
-        # print()
         
